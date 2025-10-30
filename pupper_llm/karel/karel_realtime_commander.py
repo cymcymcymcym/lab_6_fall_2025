@@ -115,15 +115,6 @@ class KarelRealtimeCommanderNode(Node):
             line = "<move, turn_left>"
             returns ['move', 'turn_left']
         """
-        # - move_forwards — Walk or run forward in the current direction.
-        #                     - move_backwards — Move backward.
-        #                     - turn_left — Rotate 90° (or as implied) anticlockwise on the spot.
-        #                     - turn_right — Rotate 90° (or as implied) clockwise on the spot.
-        #                     - bark — Bark or make a short playful noise.
-        #                     - wiggle — Wiggle or dance playfully in place.
-        #                     - sit — Sit down.
-        #                     - stand — Stand up from sitting.
-        #                     - stop — Stop any ongoing movement.
         behavior = []
         
         if 'move forwards' in line:
