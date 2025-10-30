@@ -121,22 +121,23 @@ class KarelRealtimeCommanderNode(Node):
         if 'move_forwards' in line:
             return ['move_fowards']
         elif 'move_backwards' in line:
-            return ['move_fowards']
+            return ['move_backwards']
         elif 'turn_right' in line:
-            return ['move_fowards']
+            return ['turn_right']
         elif 'turn_left' in line:
-            return ['move_fowards']
+            return ['turn_left']
         elif 'wiggle' in line:
-            return ['move_fowards']
+            return ['wiggle']
         elif 'bob' in line:
-            return ['move_fowards']
+            return ['bob']
         elif 'sit' in line:
-            return ['move_fowards']
+            return ['sit']
         elif 'stand' in line:
-            return ['move_fowards']
+            return ['stand']
         elif 'stop' in line:
-            return ['move_fowards']
-        return ['stop']
+            return ['stop']
+        
+        return []
     
     async def execute_command(self, command: str) -> bool:
         """Execute a single robot command."""
