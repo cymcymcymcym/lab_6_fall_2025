@@ -80,9 +80,38 @@ class KarelPupper:
         Remove the 'pass' statement after you implement the steps above.
         """
         # ==== TODO: Implement the steps above ====
-        pass
+        # Play bob sound if requested
+        if play_sound:
+            pygame.mixer.init()
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            sounds_dir = os.path.join(current_dir, '..', '..', 'sounds')
+            wav_path = os.path.join(sounds_dir, 'puppy_bob.wav')
+            wav_path = os.path.normpath(wav_path)
+            
+            try:
+                bob_sound = pygame.mixer.Sound(wav_path)
+                bob_sound.play()
+                self.node.get_logger().info(f'Playing bob sound from: {wav_path}')
+            except Exception as e:
+                self.node.get_logger().warning(f"Could not play wiggle sound: {e}")
 
-        self.node.get_logger().info('Bob!')
+        move_cmd = Twist()
+        move_cmd.linear.y = 0.0
+        single_bob_duration = 0.2  # seconds per half-wiggle
+        angular_speed = 0.8
+        
+        start_time = time.time()
+        direction = 1
+        while time.time() - start_time < bob_time:
+            move_cmd.angular.z = direction * angular_speed
+            self.publisher.publish(move_cmd)
+            rclpy.spin_once(self.node, timeout_sec=0.01)
+            time.sleep(single_bob_duration)
+            direction *= -1  # Switch direction
+        
+        self.stop()
+
+        self.node.get_logger().info('Wiggle!')
 
     def move_forward(self):
         """
