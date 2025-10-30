@@ -111,7 +111,35 @@ class KarelRealtimeCommanderNode(Node):
             line = "<move, turn_left>"
             returns ['move', 'turn_left']
         """
-        pass
+        # - move_forwards — Walk or run forward in the current direction.
+        #                     - move_backwards — Move backward.
+        #                     - turn_left — Rotate 90° (or as implied) anticlockwise on the spot.
+        #                     - turn_right — Rotate 90° (or as implied) clockwise on the spot.
+        #                     - bark — Bark or make a short playful noise.
+        #                     - wiggle — Wiggle or dance playfully in place.
+        #                     - sit — Sit down.
+        #                     - stand — Stand up from sitting.
+        #                     - stop — Stop any ongoing movement.
+        behavior = []
+        
+        if 'move forwards' in line:
+            behavior.append("move_forwards")
+        if 'move backwards' in line:
+            behavior.append("move_backwards")
+        if 'turn right' in line:
+            behavior.append('turn_right')
+        if 'turn left' in line:
+            behavior.append('turn_left')
+        if 'dance' or 'wiggle' in line:
+            behavior.append('wiggle')
+        if 'sit' in line:
+            behavior.append('sit')
+        if 'stand' in line:
+            behavior.append('stand')
+        if 'stop' in line:
+            behavior.append('stop')
+
+        return behavior
     
     async def execute_command(self, command: str) -> bool:
         """Execute a single robot command."""
