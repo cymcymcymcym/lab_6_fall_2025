@@ -79,6 +79,7 @@ class KarelRealtimeCommanderNode(Node):
 
         # Your code here:
         response_lines = response.split("\n")
+        logger.info(f"🔍 Response lines: {response_lines}")
         for line in response_lines:
             if line.strip():
                 commands = self.extract_commands_from_line(line.strip())
