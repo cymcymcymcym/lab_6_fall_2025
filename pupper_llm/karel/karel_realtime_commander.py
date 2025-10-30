@@ -119,7 +119,7 @@ class KarelRealtimeCommanderNode(Node):
         logger.info(f"🔍 Behavior line: {line}")
 
         if 'move_forward' in line or 'move_forwards' in line:
-            return ['move_foward']
+            return ['move_forward']
         elif 'move_backward' in line or 'move_backwards' in line:
             return ['move_backward']
         elif 'turn_right' in line:
