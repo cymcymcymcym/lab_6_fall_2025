@@ -116,26 +116,27 @@ class KarelRealtimeCommanderNode(Node):
             line = "<move, turn_left>"
             returns ['move', 'turn_left']
         """
-        behavior = []
-        
-        if 'move forwards' in line:
-            behavior.append("move_forwards")
-        if 'move backwards' in line:
-            behavior.append("move_backwards")
-        if 'turn right' in line:
-            behavior.append('turn_right')
-        if 'turn left' in line:
-            behavior.append('turn_left')
-        if 'dance' or 'wiggle' in line:
-            behavior.append('wiggle')
-        if 'sit' in line:
-            behavior.append('sit')
-        if 'stand' in line:
-            behavior.append('stand')
-        if 'stop' in line:
-            behavior.append('stop')
-        logger.info(f"🔍 Behavior: {behavior}")
-        return behavior
+        logger.info(f"🔍 Behavior line: {line}")
+
+        if 'move_forwards' in line:
+            return ['move_fowards']
+        elif 'move_backwards' in line:
+            return ['move_fowards']
+        elif 'turn_right' in line:
+            return ['move_fowards']
+        elif 'turn_left' in line:
+            return ['move_fowards']
+        elif 'wiggle' in line:
+            return ['move_fowards']
+        elif 'bob' in line:
+            return ['move_fowards']
+        elif 'sit' in line:
+            return ['move_fowards']
+        elif 'stand' in line:
+            return ['move_fowards']
+        elif 'stop' in line:
+            return ['move_fowards']
+        return ['stop']
     
     async def execute_command(self, command: str) -> bool:
         """Execute a single robot command."""
@@ -144,7 +145,7 @@ class KarelRealtimeCommanderNode(Node):
             
             # TODO: Implement the mapping from canonical command names (e.g., "move", "turn_left", "bark", etc.) to the appropriate KarelPupper action and its timing.
             # One complete mapping is shown as an example!
-            if command in ["move", "go", "forward"]:
+            if command in ["move_forwards", "go", "forward", "forwards"]:
                 self.pupper.move_forward()
                 await asyncio.sleep(0.5)  # Hint: Use await asyncio.sleep(seconds) to pace each action!
             
