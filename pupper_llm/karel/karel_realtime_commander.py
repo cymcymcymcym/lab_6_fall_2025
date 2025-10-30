@@ -143,7 +143,7 @@ class KarelRealtimeCommanderNode(Node):
             behavior.append('stand')
         if 'stop' in line:
             behavior.append('stop')
-
+        logger.info(f"🔍 Behavior: {behavior}")
         return behavior
     
     async def execute_command(self, command: str) -> bool:
